@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JobBoard - CodSoft Task</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <!-- NAVBAR (Navigation) -->
+    <nav class="navbar">
+        <div class="logo">Job<span>Board</span></div>
+        <ul class="nav-links">
+            <li><a href="#" onclick="showPage('home')">Home</a></li>
+            <li><a href="#" onclick="showPage('listings')">Find Jobs</a></li>
+            <li><a href="#" onclick="showPage('employer')">Employer Dashboard</a></li>
+            <li><a href="#" onclick="showPage('candidate')">Candidate Dashboard</a></li>
+        </ul>
+    </nav>
+
+    <div class="container">
+        
+        <!-- 1. HOME PAGE SECTION -->
+        <section id="home-page" class="page-section active">
+            <div class="hero">
+                <h1>Find Your Dream Job Today</h1>
+                <p>Connecting top talents with the best companies across the globe.</p>
+                <button class="btn" onclick="showPage('listings')">Browse All Jobs</button>
+            </div>
+        </section>
+
+        <!-- 2. JOB LISTINGS PAGE SECTION -->
+        <section id="listings-page" class="page-section">
+            <h2>Available Job Openings</h2>
+            
+            <!-- Requirement: Search Functionality -->
+            <div class="search-container">
+                <input type="text" id="search-input" onkeyup="filterJobs()" placeholder="Search by job title or company...">
+            </div>
+
+            <div class="job-list" id="job-cards-container">
+                <!-- Job Card 1 -->
+                <div class="job-card">
+                    <h3>Frontend Developer</h3>
+                    <p class="company">CodSoft Tech</p>
+                    <p class="location">Remote</p>
+                    <button class="btn-sm" onclick="viewJobDetail('Frontend Developer', 'CodSoft Tech', 'Remote', '$60,000/yr', 'Build responsive user interfaces using HTML, CSS, and JavaScript. Collaborate with design teams to bring mockups to life.')">View Details</button>
+                </div>
+                <!-- Job Card 2 -->
+                <div class="job-card">
+                    <h3>Backend Engineer</h3>
+                    <p class="company">MongoDB Solutions</p>
+                    <p class="location">Hyderabad, IN</p>
+                    <button class="btn-sm" onclick="viewJobDetail('Backend Engineer', 'MongoDB Solutions', 'Hyderabad, IN', '$80,000/yr', 'Develop secure Node.js backend services and maintain database models in MongoDB. Write clean, optimized, and testable code.')">View Details</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- 3. JOB DETAIL PAGE SECTION -->
+        <section id="detail-page" class="page-section">
+            <button class="btn-back" onclick="showPage('listings')">← Back to Listings</button>
+            <div class="job-detail-box">
+                <h2 id="detail-title">Job Title</h2>
+                <h4 id="detail-company">Company</h4>
+                <p><strong>Location:</strong> <span id="detail-location"></span></p>
+                <p><strong>Salary:</strong> <span id="detail-salary"></span></p>
+                <hr>
+                <h3>Description</h3>
+                <p id="detail-desc">Full details about the role will appear here...</p>
+                
+                <!-- Requirement: Job Application Process & Resume Upload -->
+                <div class="application-form">
+                    <h3>Apply for this Position</h3>
+                    <form id="apply-form" onsubmit="handleApply(event)">
+                        <input type="text" placeholder="Full Name" required>
+                        <input type="email" placeholder="Email Address" required>
+                        <label for="resume">Upload Resume (PDF/Word):</label>
+                        <input type="file" id="resume" required>
+                        <button type="submit" class="btn">Submit Application</button>
+                    </form>
+                </div>
+            </div>
+        </section>
+
+        <!-- 4. EMPLOYER DASHBOARD SECTION -->
+        <section id="employer-page" class="page-section">
+            <h2>Employer Dashboard</h2>
+            <p>Post a new job opening for candidates.</p>
+            <div class="form-box">
+                <form id="post-job-form" onsubmit="handlePostJob(event)">
+                    <input type="text" id="post-title" placeholder="Job Title" required>
+                    <input type="text" id="post-company" placeholder="Company Name" required>
+                    <input type="text" id="post-location" placeholder="Job Location" required>
+                    <input type="text" id="post-salary" placeholder="Salary/Compensation" required>
+                    <textarea id="post-desc" placeholder="Job Description" rows="4" required></textarea>
+                    <button type="submit" class="btn">Post Job</button>
+                </form>
+            </div>
+        </section>
+
+        <!-- 5. CANDIDATE DASHBOARD SECTION -->
+        <section id="candidate-page" class="page-section">
+            <h2>Candidate Dashboard</h2>
+            <div class="profile-summary">
+                <h3>Welcome Back, Applicant</h3>
+                <p>Manage your submitted profiles and applications below.</p>
+            </div>
+            <div class="table-responsive">
+                <h3>Your Applications</h3>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Job Title</th>
+                            <th>Company</th>
+                            <th>Status</th>
+                        </tr>
+                    </thead>
+                    <tbody id="applications-table-body">
+                        <!-- Dynamic content will load here -->
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html><!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JobBoard - CodSoft Task</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <!-- NAVBAR (Navigation) -->
+    <nav class="navbar">
+        <div class="logo">Job<span>Board</span></div>
+        <ul class="nav-links">
+            <li><a href="#" onclick="showPage('home')">Home</a></li>
+            <li><a href="#" onclick="showPage('listings')">Find Jobs</a></li>
+            <li><a href="#" onclick="showPage('employer')">Employer Dashboard</a></li>
+            <li><a href="#" onclick="showPage('candidate')">Candidate Dashboard</a></li>
+        </ul>
+    </nav>
+
+    <div class="container">
+        
+        <!-- 1. HOME PAGE SECTION -->
+        <section id="home-page" class="page-section active">
+            <div class="hero">
+                <h1>Find Your Dream Job Today</h1>
+                <p>Connecting top talents with the best companies across the globe.</p>
+                <button class="btn" onclick="showPage('listings')">Browse All Jobs</button>
+            </div>
+        </section>
+
+        <!-- 2. JOB LISTINGS PAGE SECTION -->
+        <section id="listings-page" class="page-section">
+            <h2>Available Job Openings</h2>
+            
+            <!-- Requirement: Search Functionality -->
+            <div class="search-container">
+                <input type="text" id="search-input" onkeyup="filterJobs()" placeholder="Search by job title or company...">
+            </div>
+
+            <div class="job-list" id="job-cards-container">
+                <!-- Job Card 1 -->
+                <div class="job-card">
+                    <h3>Frontend Developer</h3>
+                    <p class="company">CodSoft Tech</p>
+                    <p class="location">Remote</p>
+                    <button class="btn-sm" onclick="viewJobDetail('Frontend Developer', 'CodSoft Tech', 'Remote', '$60,000/yr', 'Build responsive user interfaces using HTML, CSS, and JavaScript. Collaborate with design teams to bring mockups to life.')">View Details</button>
+                </div>
+                <!-- Job Card 2 -->
+                <div class="job-card">
+                    <h3>Backend Engineer</h3>
+                    <p class="company">MongoDB Solutions</p>
+                    <p class="location">Hyderabad, IN</p>
+                    <button class="btn-sm" onclick="viewJobDetail('Backend Engineer', 'MongoDB Solutions', 'Hyderabad, IN', '$80,000/yr', 'Develop secure Node.js backend services and maintain database models in MongoDB. Write clean, optimized, and testable code.')">View Details</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- 3. JOB DETAIL PAGE SECTION -->
+        <section id="detail-page" class="page-section">
+            <button class="btn-back" onclick="showPage('listings')">← Back to Listings</button>
+            <div class="job-detail-box">
+                <h2 id="detail-title">Job Title</h2>
+                <h4 id="detail-company">Company</h4>
+                <p><strong>Location:</strong> <span id="detail-location"></span></p>
+                <p><strong>Salary:</strong> <span id="detail-salary"></span></p>
+                <hr>
+                <h3>Description</h3>
+                <p id="detail-desc">Full details about the role will appear here...</p>
+                
+                <!-- Requirement: Job Application Process & Resume Upload -->
+                <div class="application-form">
+                    <h3>Apply for this Position</h3>
+                    <form id="apply-form" onsubmit="handleApply(event)">
+                        <input type="text" placeholder="Full Name" required>
+                        <input type="email" placeholder="Email Address" required>
+                        <label for="resume">Upload Resume (PDF/Word):</label>
+                        <input type="file" id="resume" required>
+                        <button type="submit" class="btn">Submit Application</button>
+                    </form>
+                </div>
+            </div>
+        </section>
+
+        <!-- 4. EMPLOYER DASHBOARD SECTION -->
+        <section id="employer-page" class="page-section">
+            <h2>Employer Dashboard</h2>
+            <p>Post a new job opening for candidates.</p>
+            <div class="form-box">
+                <form id="post-job-form" onsubmit="handlePostJob(event)">
+                    <input type="text" id="post-title" placeholder="Job Title" required>
+                    <input type="text" id="post-company" placeholder="Company Name" required>
+                    <input type="text" id="post-location" placeholder="Job Location" required>
+                    <input type="text" id="post-salary" placeholder="Salary/Compensation" required>
+                    <textarea id="post-desc" placeholder="Job Description" rows="4" required></textarea>
+                    <button type="submit" class="btn">Post Job</button>
+                </form>
+            </div>
+        </section>
+
+        <!-- 5. CANDIDATE DASHBOARD SECTION -->
+        <section id="candidate-page" class="page-section">
+            <h2>Candidate Dashboard</h2>
+            <div class="profile-summary">
+                <h3>Welcome Back, Applicant</h3>
+                <p>Manage your submitted profiles and applications below.</p>
+            </div>
+            <div class="table-responsive">
+                <h3>Your Applications</h3>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Job Title</th>
+                            <th>Company</th>
+                            <th>Status</th>
+                        </tr>
+                    </thead>
+                    <tbody id="applications-table-body">
+                        <!-- Dynamic content will load here -->
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
